@@ -3,6 +3,7 @@ package edu.mriabov.restapitesttask.dao.model;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
@@ -19,6 +20,7 @@ public class User {
     private String firstName;
 
     private String lastName;
+
     @Past
     private Date birthDate;
 

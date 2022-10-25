@@ -23,4 +23,6 @@ public class UserService {
     public List<User> getByBirthdates(Date startFrom, Date endsAt){
         return userRepository.getByBirthDateBetween(startFrom, endsAt);
     }
+
+
 }
