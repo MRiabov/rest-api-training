@@ -3,8 +3,11 @@ package edu.mriabov.restapitesttask.dao.model;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import java.util.Date;
@@ -12,6 +15,11 @@ import java.util.Date;
 @Getter
 @Setter
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    Long id;
 
     @NonNull
     @Email

@@ -23,7 +23,7 @@ public class RestController {
 
     @PutMapping("/register")
     public HttpStatus registerUser(@Valid @RequestBody User user) {
-        if (user.getBirthDate().toInstant().isAfter(Instant.from(Year.now().minusYears(config.getAge())))){
+        if (user.getBirthDate().toInstant().isAfter(Instant.from(Year.now().minusYears(config.getAge())))) {
             return HttpStatus.BAD_REQUEST;
         }
         userService.save(user);
@@ -31,15 +31,23 @@ public class RestController {
     }
 
     @GetMapping("/getUser")
-    public ResponseEntity<List<User>> getUser(@RequestParam Date startFrom,@RequestParam Date endsAt){
+    public ResponseEntity<List<User>> getUser(@RequestParam Date startFrom, @RequestParam Date endsAt) {
         if (startFrom.before(endsAt)) return ResponseEntity.badRequest().build();
         List<User> users = userService.getByBirthdates(startFrom, endsAt);
         return ResponseEntity.ok(users);
     }
 
     @DeleteMapping("/deleteUser")
-    public HttpStatus deleteUser(@RequestParam String email){
+    public HttpStatus deleteUser(@RequestParam String email) {
         userService.delete(email);
         return HttpStatus.OK;
     }
+
+    @PutMapping("/editUser")
+    public HttpStatus editUser(@RequestBody User user) {
+        if (!userService.editUser(user)) return HttpStatus.NOT_FOUND;
+        return HttpStatus.OK;
+    }
+
 }
+

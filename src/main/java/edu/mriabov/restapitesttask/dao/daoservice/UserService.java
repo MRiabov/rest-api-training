@@ -25,4 +25,9 @@ public class UserService {
     }
 
 
+    public boolean editUser(User user) {
+        if (!userRepository.existsById(user.getId())) return false;
+        userRepository.save(user);
+        return true;
+    }
 }
